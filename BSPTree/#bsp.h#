@@ -1,0 +1,25 @@
+/*                                         
+ * BSP data definitions and API      
+ * author: Charles Davis
+ * created: March 2015                                               
+ * lastupdate: March 4, 2015 
+*/
+
+
+typedef struct Node {
+  struct node * left;
+  struct node * right;
+  char * data;
+
+} node;
+
+typedef struct BSP {
+  struct node * root;
+  int size;
+} bsp;
+
+struct BSP * create_tree();
+void print_tree(BSP * tree);
+void insert_tree(BSP * tree, char *s);
+int destroy_tree(BSP * tree);
+int remove_tree(BSP * tree, char * s);

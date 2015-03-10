@@ -1,0 +1,23 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+ 
+#define SKIPLIST_MAX_LEVEL 6
+ 
+typedef struct snode {
+  int key;
+  char *data;
+  struct snode **forward;
+} snode;
+ 
+typedef struct skiplist {
+  int level;
+  int size;
+  struct snode *head;
+} skiplist;
+
+//returns empty list with header initialized
+skiplist *create_slist();
+int random_level();
+void insert_slist(skiplist *list, int key, char* data);
+snode * make_snode();
