@@ -7,19 +7,19 @@
 
 
 typedef struct Node {
-  struct node * left;
-  struct node * right;
+  struct Node * left;
+  struct Node * right;
   char * data;
 
 } node;
 
 typedef struct BSP {
-  struct node * root;
+  struct Node * root;
   int size;
 } BSP;
 
 struct BSP * create_tree();
-void print_tree(BSP * tree);
-void insert_tree(BSP * tree, char *s);
-int destroy_tree(BSP * tree);
-int remove_tree(BSP * tree, char * s);
+void print_tree(struct BSP * tree);
+void insert_tree(struct BSP * tree, char *s);
+int destroy_tree(struct BSP * tree);
+int remove_tree(struct BSP * tree, char * s);

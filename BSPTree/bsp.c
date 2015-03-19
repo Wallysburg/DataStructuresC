@@ -3,7 +3,6 @@
 #include<strings.h>
 #include "bsp.h"
 
-
 //--------------------------------------------------------------
 struct Node * make_node() {
 
@@ -11,6 +10,7 @@ struct Node * make_node() {
   n->left = NULL;
   n->right = NULL;
   n->data = NULL;
+  return n;
 }
 //-------------------------------------------------------------
 void free_node(struct Node * n) {
@@ -22,9 +22,82 @@ void free_node(struct Node * n) {
 struct BSP * create_tree() {
 
   struct BSP *tree = (struct BSP *)malloc(sizeof(struct BSP));
-  tree->root = make_node();
-  tree->size = 1;
+  tree->root = NULL;
+  tree->size = 0;
 
   return tree;
 }
 //--------------------------------------------------------------
+void insert(struct Node** temp, char *s){
+//Insert at node if NULL
+//int i = 0;
+  struct Node * node = *temp;
+if (node  == NULL) {
+  struct Node *newNode = make_node();
+  newNode-> data = strdup(s);
+  (*temp) = newNode;
+  return;
+ }
+if (strcmp(s,node->data) > 0) {
+  //temp = temp->left;
+  insert(&node->left, s);
+ }
+if (strcmp(s,node->data) <= 0) {
+  insert(&node->right,s);
+  //insert(temp, s);
+ }
+
+}
+//--------------------------------------------------------------
+void insert_tree(struct BSP * tree, char *s) {
+  //Check to see that there is indeed input
+  if (strcmp(s, "") == 0) return;
+  //struct Node *temp = tree->root;
+   insert(&tree->root, s);
+   tree->size++;
+}
+void remove(struct Node ** temp, char* s){
+  struct Node * node = *temp;
+  if (node == NULL) return;
+
+
+}
+//-------------------------------------------------------------
+int remove_tree(struct BSP * tree, char * s) {
+  //return 1 if found, 0 if not found
+  if (tree->root == NULL) {
+  return 1;
+  } else {
+  remove(&tree->root, s);
+  tree->size--;
+  return 1;
+  }
+}
+
+//------------------------------------------------------------
+int destroy_tree(struct BSP * tree) {
+  return 1;
+
+}
+//--------------------------------------------------------------
+void print(struct Node* node) {
+  if (node == NULL) return;
+
+  print(node->left);
+  //printf(" /\n");
+  printf("%s ", node->data);
+  print(node->right);
+}
+//--------------------------------------------------------------
+void print_tree(struct BSP * tree) {
+  printf("\nSize: %d\n", tree->size);
+  if(tree->root == NULL) {
+    printf("Tree is Empty, Root is NULL\n");
+    return;
+
+  }
+  printf("root is :%s\n", tree->root->data);
+  struct Node *temp = tree->root;
+  print(temp);
+}
+//-------------------------------------------------------------
